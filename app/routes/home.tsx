@@ -3,6 +3,8 @@ import type { Route } from "./+types/home";
 
 import Navbar from "components/Navbar";
 import Button from "components/ui/Button";
+import Upload from "components/Upload";
+import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,6 +14,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleUploadComplete = async (base64string: string) => {
+    const newId = Date.now().toString();
+    navigate(`/visualizer/${newId}`);
+    return true;
+  };
+
   return (
     <div className="home">
       <Navbar />
@@ -45,22 +55,24 @@ export default function Home() {
               <h3>Upload your floor plan</h3>
               <p>Supports JPG, PNG,formats upto 10MB</p>
             </div>
-            <p>Upload Images</p>
+            <Upload onComplete={handleUploadComplete} />
           </div>
         </div>
       </section>
 
       <section className="projects">
-
         <div className="section-inner">
           <div className="section-head">
             <div className="copy">
               <h2>Projects</h2>
-              <p>Your latest work and shared community projects, all at one place.</p>
+              <p>
+                Your latest work and shared community projects, all at one
+                place.
+              </p>
             </div>
           </div>
           <div className="projects-grid">
-            <div className="project-card group"> 
+            <div className="project-card group">
               <div className="preview">
                 <img src="" alt="" />
                 <div className="badge">
@@ -71,14 +83,14 @@ export default function Home() {
                 <div>
                   <h3>Project Manhattan</h3>
                   <div className="meta">
-                    <Clock size={12}/>
-                    <span>{new Date('01.01.2027').toLocaleDateString()}</span>
+                    <Clock size={12} />
+                    <span>{new Date("01.01.2027").toLocaleDateString()}</span>
                     <span>By Ram</span>
                   </div>
                 </div>
-<div className="arrow">
-  <ArrowRight size={18}/>
-</div>
+                <div className="arrow">
+                  <ArrowRight size={18} />
+                </div>
               </div>
             </div>
           </div>
