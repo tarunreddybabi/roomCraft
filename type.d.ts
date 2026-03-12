@@ -20,7 +20,7 @@ interface DesignItem {
     renderedImage?: string | null;
     renderedPath?: string | null;
     publicPath?: string | null;
-    timestamp: number;
+    timeStamp: number;
     ownerId?: string | null;
     sharedBy?: string | null;
     sharedAt?: string | null;
