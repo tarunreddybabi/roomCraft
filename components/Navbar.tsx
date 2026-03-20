@@ -6,21 +6,17 @@ const Navbar = () => {
   const { isSignedIn, userName, refreshAuth, signIn, signOut } =
     useOutletContext<AuthContext>();
   const handleAuthClick = async () => {
-    if (isSignedIn) {
-      try {
-        await signOut();
-      } catch (error) {
-        console.error("Failed to sign out:", error);
-      }
-    }
     try {
-      await signIn();
+      if (isSignedIn) {
+        await signOut();
+      } else {
+        await signIn();
+      }
+      await refreshAuth();
     } catch (error) {
-      console.error("Failed to sign in:", error);
+      console.error("Authentication action failed:", error);
     }
-    await refreshAuth();
   };
-
 
 
   return (
